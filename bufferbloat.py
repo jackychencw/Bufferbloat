@@ -67,20 +67,22 @@ parser.add_argument('--cong',
 # Expt parameters
 args = parser.parse_args()
 
+
 class BBTopo(Topo):
     "Simple topology for bufferbloat experiment."
 
     def build(self, n=2):
         # Here are two hosts
         hosts = []
-        for i in range(1,n+1):
-            hosts.append(self.addHost('h%d'%(i)))
+        for i in range(1, n+1):
+            hosts.append(self.addHost('h%d' % (i)))
 
         # Here I have created a switch.  If you change its name, its
         # interface names will change from s0-eth1 to newname-eth1.
         switch = self.addSwitch('s0')
 
         # TODO: Add links with appropriate characteristics
+        print(switch)
 
 # Simple wrappers around monitoring utilities.  You are welcome to
 # contribute neatly written (using classes) monitoring scripts for
@@ -88,19 +90,24 @@ class BBTopo(Topo):
 
 # tcp_probe is a kernel module which records cwnd over time. In linux >= 4.16
 # it has been replaced by the tcp:tcp_probe kernel tracepoint.
+
+
 def start_tcpprobe(outfile="cwnd.txt"):
     os.system("rmmod tcp_probe; modprobe tcp_probe full=1;")
     Popen("cat /proc/net/tcpprobe > %s/%s" % (args.dir, outfile),
           shell=True)
 
+
 def stop_tcpprobe():
     Popen("killall -9 cat", shell=True).wait()
+
 
 def start_qmon(iface, interval_sec=0.1, outfile="q.txt"):
     monitor = Process(target=monitor_qlen,
                       args=(iface, interval_sec, outfile))
     monitor.start()
     return monitor
+
 
 def start_iperf(net):
     h2 = net.get('h2')
@@ -112,11 +119,13 @@ def start_iperf(net):
     # TODO: Start the iperf client on h1.  Ensure that you create a
     # long lived TCP flow. You may need to redirect iperf's stdout to avoid blocking.
 
+
 def start_webserver(net):
     h1 = net.get('h1')
     proc = h1.popen("python http/webserver.py", shell=True)
     sleep(1)
     return [proc]
+
 
 def start_ping(net):
     # TODO: Start a ping train from h1 to h2 (or h2 to h1, does it
@@ -130,7 +139,8 @@ def start_ping(net):
     # until stdout is read. You can avoid this by runnning popen.communicate() or
     # redirecting stdout
     h1 = net.get('h1')
-    popen = h1.popen("echo '' > %s/ping.txt"%(args.dir), shell=True)
+    popen = h1.popen("echo '' > %s/ping.txt" % (args.dir), shell=True)
+
 
 def bufferbloat():
     if not os.path.exists(args.dir):
@@ -200,6 +210,7 @@ def bufferbloat():
     # Ensure that all processes you create within Mininet are killed.
     # Sometimes they require manual killing.
     Popen("pgrep -f webserver.py | xargs kill -9", shell=True).wait()
+
 
 if __name__ == "__main__":
     bufferbloat()
