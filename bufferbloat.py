@@ -82,7 +82,10 @@ class BBTopo(Topo):
         switch = self.addSwitch('s0')
 
         # TODO: Add links with appropriate characteristics
-        print(switch)
+        print("Setting up the link from h1 to switch")
+        for host in hosts:
+            self.addLink(host, switch)
+        print("Done")
 
 # Simple wrappers around monitoring utilities.  You are welcome to
 # contribute neatly written (using classes) monitoring scripts for
