@@ -1,7 +1,6 @@
 # SETUP
-======
 All required dependencies are included in requirements.txt
-1. Dependencies
+1. Dependencies\\
 run following command to install them:
 ```shell
 sudo pip install -r requirements.txt
