@@ -69,12 +69,11 @@ args = parser.parse_args()
 
 
 bw_host = args.bw_host
-print(bw_host)
 bw_net = args.bw_net
 delay = args.delay
 directory = args.dir
 time = args.time
-max_q = args.max_q
+maxq = args.maxq
 
 
 
