@@ -68,12 +68,12 @@ parser.add_argument('--cong',
 args = parser.parse_args()
 
 
-bw_host = args.bw_host
-bw_net = args.bw_net
-delay = args.delay
-directory = args.dir
-time = args.time
-maxq = args.maxq
+arg_bw_host = args.bw_host
+arg_bw_net = args.bw_net
+arg_delay = args.delay
+arg_dir = args.dir
+arg_time = args.time
+arg_maxq = args.maxq
 
 
 
