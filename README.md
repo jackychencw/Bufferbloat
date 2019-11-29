@@ -1,6 +1,6 @@
-# SETUP
+# 1. SETUP
 All required dependencies are included in requirements.txt
-## 1. Dependencies <br />
+## Dependencies <br />
 run following command to install requirements in root folder, all dependencies should be included in requirements.txt:
 ```shell
 sudo pip install -r requirements.txt
