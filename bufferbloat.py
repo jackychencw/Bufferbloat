@@ -147,15 +147,14 @@ def start_ping(net):
     # until stdout is read. You can avoid this by runnning popen.communicate() or
     # redirecting stdout
     h1 = net.get('h1')
-    popen = h1.popen("echo '' > %s/ping.txt" % (args.dir), shell=True)
     h2 = net.get('h2')
-    # ping man:
-    # -c: count, stop after count
-    # -i: interval, only super user can set interval under 0.2s
     interval = 0.1
     times = int(args.time/interval)
     print('sending ping constantly, %s times in total, %s interval' %(times, interval))
-    h1.popen('ping -c %s -i %s' % (times, interval))
+    # ping man:
+    # -c: count, stop after count
+    # -i: interval, only super user can set interval under 0.2s
+    popen = h1.popen("echo 'ping -c %s -i %s' %s > %s/ping.txt" % (times, interval, h2.IP(), args.dir), shell=True)
 
 
 def bufferbloat():
@@ -216,7 +215,7 @@ def bufferbloat():
     while True:
         # do the measurement (say) 3 times.
         results = measurement(net, times=3)
-        download_time.append(results)
+        download_time.extend(results)
         sleep(5)
         now = time()
         delta = now - start_time
@@ -227,7 +226,8 @@ def bufferbloat():
     # TODO: compute average (and standard deviation) of the fetch
     # times.  You don't need to plot them.  Just note it in your
     # README and explain.
-    print(download_time)
+    average = sum(download_time)/len(download_time)
+    print("Average download time is %s" % average)
     stop_tcpprobe()
     if qmon is not None:
         qmon.terminate()
@@ -240,11 +240,8 @@ def measurement(net, times = 3):
     h1, h2 = net.get('h1', 'h2')
     IP = h1.IP()
     command = 'curl -o /dev/null -s -w %%{time_total} %s/http/index.html' % IP
-    for i in range(times):
-        t = h2.cmd(command)
-        print(t)
-    # results = [h2.cmd(command) for i in range(times)]
-    return t
+    results = [h2.cmd(command) for i in range(times)]
+    return results
 
 if __name__ == "__main__":
     bufferbloat()
