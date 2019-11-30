@@ -82,8 +82,8 @@ class BBTopo(Topo):
 
         # TODO: Add links with appropriate characteristics
         print("Setting up the link from hosts to switch")
-        self.addLink('h1', switch, bw=args.bw_host, delay=args.delay, max_queue_size=args.maxq)
-        self.addLink(switch, 'h2', bw=args.bw_net, delay=args.delay, max_queue_size=args.maxq)
+        self.addLink('h1', switch, bw=args.bw_host, delay="%sms" % args.delay, max_queue_size=args.maxq)
+        self.addLink(switch, 'h2', bw=args.bw_net, delay="%sms" % args.delay, max_queue_size=args.maxq)
         print("Done setting up links")
 
 # Simple wrappers around monitoring utilities.  You are welcome to
