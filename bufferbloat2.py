@@ -168,7 +168,6 @@ def get_web_measurement(net):
     for i in range(3):
         t = h2.popen(
             'curl -o /dev/null -s -w %%{time_total} %s/http/index.html' % h1.IP()).communicate()[0]
-    print(t)
     results.append(t)
     return results
 
@@ -226,7 +225,6 @@ def bufferbloat():
             break
         print "%.1fs left..." % (args.time - delta)
     # print web_download_time
-    print(web_download_time)
 
     wdt = np.array(web_download_time).astype(np.float)
     # TODO: Move to readme
