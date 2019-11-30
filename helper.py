@@ -9,7 +9,7 @@ import os
 if os.uname()[0] == "Darwin":
     m.use("MacOSX")
 else:
-    m.use("Agg")
+    m.use("TkAgg")
 import matplotlib.pyplot as plt
 import argparse
 import math
