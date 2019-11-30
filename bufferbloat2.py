@@ -225,6 +225,7 @@ def bufferbloat():
             break
         print "%.1fs left..." % (args.time - delta)
     # print web_download_time
+    print(web_download_time)
 
     wdt = np.array(web_download_time).astype(np.float)
     # TODO: Move to readme
