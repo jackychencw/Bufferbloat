@@ -117,11 +117,13 @@ def start_iperf(net):
     # For those who are curious about the -w 16m parameter, it ensures
     # that the TCP flow is not receiver window limited.  If it is,
     # there is a chance that the router buffer may not get filled up.
+    print("going to start h2")
     server = h2.popen("iperf -s -w 16m")
     # TODO: Start the iperf client on h1.  Ensure that you create a
     # long lived TCP flow. You may need to redirect iperf's stdout to avoid blocking.
     h1 = net.get('h1')
     ip = h2.IP()
+    print("going to run cmd")
     h1.cmd("iperf -t %s -c %s " % (args.time, ip))
     print("Finished starting iperf server ...")
 
