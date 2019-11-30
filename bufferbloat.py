@@ -18,6 +18,8 @@ from argparse import ArgumentParser
 from monitor import monitor_qlen
 import termcolor as T
 
+from helper import *
+
 import sys
 import os
 import math
@@ -55,7 +57,7 @@ parser.add_argument('--maxq',
                     type=int,
                     help="Max buffer size of network interface in packets",
                     default=100)
-
+sum(download_time)/len(download_time)
 # Linux uses CUBIC-TCP by default that doesn't have the usual sawtooth
 # behaviour.  For those who are curious, invoke this script with
 # --cong cubic and see what happens...
@@ -227,8 +229,10 @@ def bufferbloat():
     # TODO: compute average (and standard deviation) of the fetch
     # times.  You don't need to plot them.  Just note it in your
     # README and explain.
-    average = sum(download_time)/len(download_time)
+    average = avg(download_time)
+    s = stdev(download_time)
     print("Average download time is %s" % average)
+    pritn("Standard Deviation is %s" % s)
     stop_tcpprobe()
     if qmon is not None:
         qmon.terminate()
