@@ -240,6 +240,7 @@ def measurement(net, times = 3):
     h1, h2 = net.get('h1', 'h2')
     IP = h1.IP()
     command = 'curl -o /dev/null -s -w %s %s/http/index.html' % (args.time, h1.IP())
+    print(command)
     for i in range(times):
         t = h2.popen(command).communicate()[0]
     print(t)

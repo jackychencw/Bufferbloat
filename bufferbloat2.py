@@ -168,6 +168,7 @@ def get_web_measurement(net):
     for i in range(3):
         t = h2.popen(
             'curl -o /dev/null -s -w %%{time_total} %s/http/index.html' % h1.IP()).communicate()[0]
+    print(t)
     results.append(t)
     return results
 
