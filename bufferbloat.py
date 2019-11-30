@@ -123,6 +123,7 @@ def start_iperf(net):
     h1 = net.get('h1')
     ip = h2.IP()
     h1.cmd("iperf -t %s -c %s " % (args.time, ip))
+    print("Finished starting iperf server ...")
 
 
 def start_webserver(net):
