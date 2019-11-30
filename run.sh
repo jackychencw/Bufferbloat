@@ -28,9 +28,9 @@ for qsize in 20 100; do
     # TODO: Ensure the input file names match the ones you use in
     # bufferbloat.py script.  Also ensure the plot file names match
     # the required naming convsention when submitting your tarball.
-    python plot_tcpprobe.py -f $dir/cwnd.txt -o $dir/cwnd-iperf.png -p $iperf_port
-    python plot_queue.py -f $dir/q.txt -o $dir/q.png
-    python plot_ping.py -f $dir/ping.txt -o $dir/rtt.png
+    sudo python plot_tcpprobe.py -f $dir/cwnd.txt -o $dir/cwnd-iperf.png -p $iperf_port
+    sudo python plot_queue.py -f $dir/q.txt -o $dir/q.png
+    sudo python plot_ping.py -f $dir/ping.txt -o $dir/rtt.png
     cp $dir/cwnd-iperf.png ./cwind-q$qsize.png
     cp $dir/q.png ./buffer-q$qsize.png
     cp $dir/rtt.png ./rtt-q$qsize.png

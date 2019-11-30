@@ -1,22 +1,18 @@
 '''
 Helper module for the plot scripts.
 '''
-print("hello0")
+
 import re
 import itertools
 import matplotlib as m
 import os
-print("hello1")
 if os.uname()[0] == "Darwin":
     m.use("MacOSX")
 else:
     m.use("Agg")
-print("hello2")
 import matplotlib.pyplot as plt
-print("hello3")
 import argparse
 import math
-
 #import termcolor as T
 
 def read_list(fname, delim=','):
@@ -76,7 +72,7 @@ def stdev(lst):
 
 def xaxis(values, limit):
     l = len(values)
-    return zip(*map(lambda x,y: (x*1.0*limit/l, y), enumerate(values)))
+    return zip(*map(lambda (x,y): (x*1.0*limit/l, y), enumerate(values)))
 
 def grouper(n, iterable, fillvalue=None):
     "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
