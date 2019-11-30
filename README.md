@@ -16,4 +16,5 @@ sudo python setup.py install
 ``` 
 this command should install the newest version of six, then you can rerun command above, should install required dependencies correctly now.
 
-
+## Some Error that worth noticing <br />
+Strange things happened when I ran ./run.sh for the first time, I got bus error at the end of experimental time, with no extra log, after examing each file for almost an hour it turns out it was permission issue with matplotlib.pyplot in helper.py. So in order to fix this bus error I have to add sudo in front of each python command in ./run.sh, I'm not sure what the side effect will be(it might ask you to enter password maybe), therefore I think it's worth mentioning.
