@@ -239,7 +239,7 @@ def measurement(net, times = 3):
     h1, h2 = net.get('h1', 'h2')
     IP = h1.IP()
     command = 'curl -o /dev/null -s -w %%{time_total} %s/http/index.html' % IP
-    results = [h2.cmd(command) for i in range(times)]
+    results = [int(h2.cmd(command)) for i in range(times)]
     return results
 
 if __name__ == "__main__":
