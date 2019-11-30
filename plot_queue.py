@@ -74,6 +74,8 @@ for i, f in enumerate(args.files):
     ax.scatter(xaxis, qlens, label=args.legend[i], **get_style(i))
     ax.xaxis.set_major_locator(MaxNLocator(4))
 
+
+print("hello")
 plt.ylabel("Packets")
 plt.grid(True)
 plt.xlabel("Seconds")
