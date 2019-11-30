@@ -1,6 +1,7 @@
 #!/bin/bash
-sudo python ./six-1.13.0/setup.py install 
-sudo pip install --ignore-installed six -r requirements.txt
+
+# sudo python ./six-1.13.0/setup.py install 
+# sudo pip install --ignore-installed six -r requirements.txt
 
 set -e
 
