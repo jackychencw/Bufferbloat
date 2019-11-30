@@ -113,7 +113,7 @@ def start_qmon(iface, interval_sec=0.1, outfile="q.txt"):
 
 def start_iperf(net):
     h2 = net.get('h2')
-    print "Starting iperf server..."
+    print("Starting iperf server...")
     # For those who are curious about the -w 16m parameter, it ensures
     # that the TCP flow is not receiver window limited.  If it is,
     # there is a chance that the router buffer may not get filled up.
@@ -121,8 +121,7 @@ def start_iperf(net):
     # TODO: Start the iperf client on h1.  Ensure that you create a
     # long lived TCP flow. You may need to redirect iperf's stdout to avoid blocking.
     h1 = net.get('h1')
-    ip = h2.IP()
-    h1.cmd("iperf -t %s -c %s " % (args.time, ip))
+    h1.popen("echo 'iperf -t %s -c %s' > %s/iperf.txt " % (args.time, h2.IP(), args.dir), shell=True)
     print("Finished starting iperf server ...")
 
 
@@ -154,7 +153,7 @@ def start_ping(net):
     # ping man:
     # -c: count, stop after count
     # -i: interval, only super user can set interval under 0.2s
-    popen = h1.popen("echo 'ping -c %s -i %s' %s > %s/ping.txt" % (times, interval, h2.IP(), args.dir), shell=True)
+    popen = h1.popen("echo 'ping -c %s -i %s %s' > %s/ping.txt" % (times, interval, h2.IP(), args.dir), shell=True)
 
 
 def bufferbloat():
