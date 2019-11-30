@@ -212,9 +212,12 @@ def bufferbloat():
     # spawned on host h1 (not from google!)
     # Hint: have a separate function to do this and you may find the
     # loop below useful.
+    download_time[]
     start_time = time()
     while True:
         # do the measurement (say) 3 times.
+        results = measurement(net, times=3)
+        download_time.extend(results)
         sleep(1)
         now = time()
         delta = now - start_time
@@ -234,6 +237,12 @@ def bufferbloat():
     # Sometimes they require manual killing.
     Popen("pgrep -f webserver.py | xargs kill -9", shell=True).wait()
 
+def measurement(net, times = 3):
+    h1, h2 = net.get('h1', 'h2')
+    IP = h2.IP()
+    command = 'curl -o /dev/null -s -w %{args.time} %{IP}/http/index.html'
+    results = [h2.cmd(command) for i in range(times)]
+    return results
 
 if __name__ == "__main__":
     bufferbloat()
