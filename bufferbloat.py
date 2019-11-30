@@ -240,7 +240,7 @@ def measurement(net, times = 3):
     h1, h2 = net.get('h1', 'h2')
     IP = h1.IP()
     command = 'curl -o /dev/null -s -w %{args.time} %{IP}/http/index.html'
-    results = [h2.popen('curl -o /dev/null -s -w %%{args.time} %%{IP}/http/index.html').communicate()[0] for i in range(times)]
+    results = [h2.popen('curl -o /dev/null -s -w %s %s/http/index.html' % (args.time, h1.IP())).communicate()[0] for i in range(times)]
     return results
 
 if __name__ == "__main__":
