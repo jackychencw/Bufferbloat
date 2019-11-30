@@ -8,7 +8,7 @@ time=60
 bwnet=10
 # TODO: If you want the RTT to be 4ms what should the delay on each
 # link be?  Set this value correctly.
-delay=1
+delay=1ms
 
 iperf_port=5001
 
