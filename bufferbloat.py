@@ -75,9 +75,6 @@ arg_dir = args.dir
 arg_time = args.time
 arg_maxq = args.maxq
 
-
-
-
 class BBTopo(Topo):
     "Simple topology for bufferbloat experiment."
 
@@ -93,8 +90,8 @@ class BBTopo(Topo):
 
         # TODO: Add links with appropriate characteristics
         print("Setting up the link from hosts to switch")
-        for host in hosts:
-            self.addLink(host, switch)
+        self.addLink('h1', switch, bw=arg_bw_host, delay=arg_delay, max_queue_size=arg_maxq)
+        self.addLink(switch, 'h2', bw=arg_bw_net, delay=arg_delay, max_queue_size=arg_maxq)
         print("Done setting up links")
 
 # Simple wrappers around monitoring utilities.  You are welcome to
