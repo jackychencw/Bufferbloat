@@ -216,8 +216,8 @@ def bufferbloat():
     while True:
         # do the measurement (say) 3 times.
         results = measurement(net, times=3)
-        download_time.extend(results)
-        sleep(1)
+        download_time.append(results)
+        sleep(5)
         now = time()
         delta = now - start_time
         if delta > args.time:
@@ -239,9 +239,12 @@ def bufferbloat():
 def measurement(net, times = 3):
     h1, h2 = net.get('h1', 'h2')
     IP = h1.IP()
-    command = 'curl -o /dev/null -s -w %{args.time} %{IP}/http/index.html'
-    results = [h2.popen('curl -o /dev/null -s -w %s %s/http/index.html' % (args.time, h1.IP())).communicate()[0] for i in range(times)]
-    return results
+    command = 'curl -o /dev/null -s -w %s %s/http/index.html' % (args.time, h1.IP())
+    for i in range(times):
+        t = h2.popen(command).communicate()[0]
+    print(t)
+    results = [h2.cmd(command) for i in range(times)]
+    return t
 
 if __name__ == "__main__":
     bufferbloat()
