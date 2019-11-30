@@ -193,8 +193,7 @@ def bufferbloat():
     # TODO: Start iperf, webservers, etc.
     iperf_process = Process(target=start_iperf, args=(net, ))
     iperf_process.start()
-    webserver_process = Process(target=start_webserver, args=(net, ))
-    webserver_process.start()
+    webserver = start_webserver(net)
     # p1 = Process(target=start_iperf, args=(net, ))
     # p2 = Process(target=start_webserver, args=(net, ))
     # p1.start()
