@@ -128,9 +128,11 @@ def start_iperf(net):
 
 
 def start_webserver(net):
+    print('starting web server')
     h1 = net.get('h1')
     proc = h1.popen("python http/webserver.py", shell=True)
     sleep(1)
+    print('finished web server startup')
     return [proc]
 
 
@@ -153,6 +155,7 @@ def start_ping(net):
     # -i: interval, only super user can set interval under 0.2s
     interval = 0.1
     times = int(args.time/interval)
+    print('sending ping constantly, %s times in total, %s interval' %(times, interval))
     h1.popen('ping -c %s -i %s' % (times, interval))
 
 
@@ -190,7 +193,8 @@ def bufferbloat():
     # TODO: Start iperf, webservers, etc.
     iperf_process = Process(target=start_iperf, args=(net, ))
     iperf_process.start()
-    start_webserver(net)
+    webserver_process = Process(target=start_webserver, args=(net, ))
+    webserver_process.start()
     # p1 = Process(target=start_iperf, args=(net, ))
     # p2 = Process(target=start_webserver, args=(net, ))
     # p1.start()
