@@ -228,7 +228,7 @@ def bufferbloat():
     # TODO: compute average (and standard deviation) of the fetch
     # times.  You don't need to plot them.  Just note it in your
     # README and explain.
-
+    print(download_time)
     stop_tcpprobe()
     if qmon is not None:
         qmon.terminate()
@@ -239,7 +239,7 @@ def bufferbloat():
 
 def measurement(net, times = 3):
     h1, h2 = net.get('h1', 'h2')
-    IP = h2.IP()
+    IP = h1.IP()
     command = 'curl -o /dev/null -s -w %{args.time} %{IP}/http/index.html'
     results = [h2.cmd(command) for i in range(times)]
     return results
