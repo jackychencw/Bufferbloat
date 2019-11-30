@@ -122,8 +122,7 @@ def start_iperf(net):
     # long lived TCP flow. You may need to redirect iperf's stdout to avoid blocking.
     h1 = net.get('h1')
     ip = h2.IP()
-    new_process = Process(target=h1.cmd, args=("iperf -t %s -c %s " % (args.time, ip),))
-    new_process.start()
+    h1.cmd("iperf -t %s -c %s " % (args.time, ip))
     print("Finished starting iperf server ...")
 
 
@@ -241,7 +240,7 @@ def measurement(net, times = 3):
     h1, h2 = net.get('h1', 'h2')
     IP = h1.IP()
     command = 'curl -o /dev/null -s -w %{args.time} %{IP}/http/index.html'
-    results = [h2.cmd(command) for i in range(times)]
+    results = [h2.popen(command).communicate()[0] for i in range(times)]
     return results
 
 if __name__ == "__main__":
