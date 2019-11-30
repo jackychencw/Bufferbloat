@@ -57,7 +57,6 @@ parser.add_argument('--maxq',
                     type=int,
                     help="Max buffer size of network interface in packets",
                     default=100)
-sum(download_time)/len(download_time)
 # Linux uses CUBIC-TCP by default that doesn't have the usual sawtooth
 # behaviour.  For those who are curious, invoke this script with
 # --cong cubic and see what happens...
@@ -232,7 +231,7 @@ def bufferbloat():
     average = avg(download_time)
     s = stdev(download_time)
     print("Average download time is %s" % average)
-    pritn("Standard Deviation is %s" % s)
+    print("Standard Deviation is %s" % s)
     stop_tcpprobe()
     if qmon is not None:
         qmon.terminate()
