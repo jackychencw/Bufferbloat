@@ -150,7 +150,8 @@ def start_ping(net):
     # -c: count, stop after count
     # -i: interval, only super user can set interval under 0.2s
     interval = 0.1
-    h1.popen(f'ping -c {int(arg_time/interval)} -i {interval}')
+    times = int(args.time/interval)
+    h1.popen('ping -c %s -i %s' % (times, interval))
 
 
 def bufferbloat():
