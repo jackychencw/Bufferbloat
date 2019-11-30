@@ -67,14 +67,6 @@ parser.add_argument('--cong',
 # Expt parameters
 args = parser.parse_args()
 
-
-arg_bw_host = args.bw_host
-arg_bw_net = args.bw_net
-arg_delay = args.delay
-arg_dir = args.dir
-arg_time = args.time
-arg_maxq = args.maxq
-
 class BBTopo(Topo):
     "Simple topology for bufferbloat experiment."
 
@@ -90,8 +82,8 @@ class BBTopo(Topo):
 
         # TODO: Add links with appropriate characteristics
         print("Setting up the link from hosts to switch")
-        self.addLink('h1', switch, bw=arg_bw_host, delay=arg_delay, max_queue_size=arg_maxq)
-        self.addLink(switch, 'h2', bw=arg_bw_net, delay=arg_delay, max_queue_size=arg_maxq)
+        self.addLink('h1', switch, bw=args.bw_host, delay=args.delay, max_queue_size=args.maxq)
+        self.addLink(switch, 'h2', bw=args.bw_net, delay=args.delay, max_queue_size=args.maxq)
         print("Done setting up links")
 
 # Simple wrappers around monitoring utilities.  You are welcome to
