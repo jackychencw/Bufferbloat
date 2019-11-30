@@ -7,10 +7,12 @@ import itertools
 import matplotlib as m
 import os
 print("hello1")
-if os.uname()[0] == "Darwin":
-    m.use("MacOSX")
-else:
-    m.use("Agg")
+import matplotlib.backends._tkagg
+import matplotlib.agg
+# if os.uname()[0] == "Darwin":
+#     m.use("MacOSX")
+# else:
+#     m.use("Agg")
 print("hello2")
 import matplotlib.pyplot as plt
 print("hello3")
