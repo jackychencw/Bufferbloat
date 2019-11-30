@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sudo pip install --ignore-installed six -r requirements.txt
-
 set -e
 
 # Note: Mininet must be run as root.  So invoke this shell script
