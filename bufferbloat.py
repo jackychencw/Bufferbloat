@@ -121,7 +121,7 @@ def start_iperf(net):
     # TODO: Start the iperf client on h1.  Ensure that you create a
     # long lived TCP flow. You may need to redirect iperf's stdout to avoid blocking.
     h1 = net.get('h1')
-    h1.popen("echo 'iperf -t %s -c %s' > %s/iperf.txt " % (args.time, h2.IP(), args.dir), shell=True)
+    h1.popen("iperf -t %s -c %s > %s/iperf.txt " % (args.time, h2.IP(), args.dir), shell=True)
     print("Finished starting iperf server ...")
 
 
@@ -146,14 +146,16 @@ def start_ping(net):
     # until stdout is read. You can avoid this by runnning popen.communicate() or
     # redirecting stdout
     h1 = net.get('h1')
+    popen = h1.popen("echo '' > %s/ping.txt" % args.dir, shell=True)
     h2 = net.get('h2')
     interval = 0.1
-    times = int(args.time/interval)
-    print('sending ping constantly, %s times in total, %s interval' %(times, interval))
+    count = int(args.time/interval)
+    print('sending ping constantly, %s times in total, %s interval' %(count, interval))
+    h1.popen('ping -c %s -i %s %s > %s/ping.txt' % (count, interval, h2.IP(), args.dir), shell=True)
     # ping man:
     # -c: count, stop after count
     # -i: interval, only super user can set interval under 0.2s
-    popen = h1.popen("echo 'ping -c %s -i %s %s' > %s/ping.txt" % (times, interval, h2.IP(), args.dir), shell=True)
+    
 
 
 def bufferbloat():
