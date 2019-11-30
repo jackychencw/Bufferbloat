@@ -121,7 +121,7 @@ def start_iperf(net):
     # TODO: Start the iperf client on h1.  Ensure that you create a
     # long lived TCP flow. You may need to redirect iperf's stdout to avoid blocking.
     h1 = net.get('h1')
-    h1.cmd(f'iperf -t {arg_time} -c {h2.IP()}')
+    h1.cmd(f'iperf -t {args.time} -c {h2.IP()}')
 
 
 def start_webserver(net):
@@ -148,7 +148,8 @@ def start_ping(net):
     # ping man:
     # -c: count, stop after count
     # -i: interval, only super user can set interval under 0.2s
-    h1.popen(f'ping -c {arg_time/0.1} -i {0.1}')
+    interval = 0.1
+    h1.popen(f'ping -c {int(arg_time/interval)} -i {interval}')
 
 
 def bufferbloat():
@@ -178,18 +179,20 @@ def bufferbloat():
     # Depending on the order you add links to your network, this
     # number may be 1 or 2.  Ensure you use the correct number.
     #
-    # qmon = start_qmon(iface='s0-eth2',
-    #                  outfile='%s/q.txt' % (args.dir))
-    qmon = None
+    qmon = start_qmon(iface='s0-eth2',
+                     outfile='%s/q.txt' % (args.dir))
 
     # TODO: Start iperf, webservers, etc.
-    # start_iperf(net)
+    p1 = Process(target=start_iperf, args=(net, ))
+    p2 = Process(target=start_webserver, arg=(net, ))
+    p1.start()
+    p2.start()
 
     # Hint: The command below invokes a CLI which you can use to
     # debug.  It allows you to run arbitrary commands inside your
     # emulated hosts h1 and h2.
     #
-    # CLI(net)
+    CLI(net)
 
     # TODO: measure the time it takes to complete webpage transfer
     # from h1 to h2 (say) 3 times.  Hint: check what the following
