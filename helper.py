@@ -13,9 +13,10 @@ else:
     m.use("Agg")
 print("hello2")
 import matplotlib.pyplot as plt
+print("hello3")
 import argparse
 import math
-print("hello3")
+
 #import termcolor as T
 
 def read_list(fname, delim=','):
