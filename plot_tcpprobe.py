@@ -73,7 +73,6 @@ added = defaultdict(int)
 events = []
 
 def plot_cwnds(ax):
-    print("plotting cwnds")
     global events
     for f in args.files:
         times, cwnds = parse_file(f)
@@ -83,7 +82,6 @@ def plot_cwnds(ax):
 
             events += zip(t, [port]*len(t), cwnd)
             ax.plot(t, cwnd)
-    print("finished plotting cwnds")
 
     events.sort()
 total_cwnd = 0

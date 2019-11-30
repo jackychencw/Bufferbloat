@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import argparse
 import math
 #import termcolor as T
-
+print("hello")
 def read_list(fname, delim=','):
     lines = open(fname).xreadlines()
     ret = []

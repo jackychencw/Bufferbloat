@@ -1,7 +1,6 @@
 '''
 Plot queue occupancy over time
 '''
-print("hello")
 from helper import *
 import plot_defaults
 import sys
@@ -9,7 +8,7 @@ import sys
 from matplotlib.ticker import MaxNLocator
 from pylab import figure
 
-print("hello")
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--files', '-f',
                     help="Queue timeseries output to one plot",
@@ -75,8 +74,6 @@ for i, f in enumerate(args.files):
     ax.scatter(xaxis, qlens, label=args.legend[i], **get_style(i))
     ax.xaxis.set_major_locator(MaxNLocator(4))
 
-
-print("hello")
 plt.ylabel("Packets")
 plt.grid(True)
 plt.xlabel("Seconds")
