@@ -8,7 +8,7 @@ import sys
 from matplotlib.ticker import MaxNLocator
 from pylab import figure
 
-
+print("hello")
 parser = argparse.ArgumentParser()
 parser.add_argument('--files', '-f',
                     help="Queue timeseries output to one plot",
