@@ -1,0 +1,2 @@
+Mean of web download: 0.488333 
+Standard deviation: 0.109377 
