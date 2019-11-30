@@ -239,12 +239,11 @@ def bufferbloat():
 def measurement(net, times = 3):
     h1, h2 = net.get('h1', 'h2')
     IP = h1.IP()
-    command = 'curl -o /dev/null -s -w %s %s/http/index.html' % (args.time, h1.IP())
-    print(command)
+    command = 'curl -o /dev/null -s -w %%{time_total} %s/http/index.html' % IP
     for i in range(times):
         t = h2.cmd(command)
-    print(t)
-    results = [h2.cmd(command) for i in range(times)]
+        print(t)
+    # results = [h2.cmd(command) for i in range(times)]
     return t
 
 if __name__ == "__main__":
