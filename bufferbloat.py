@@ -146,7 +146,7 @@ def start_ping(net):
     # until stdout is read. You can avoid this by runnning popen.communicate() or
     # redirecting stdout
     h1 = net.get('h1')
-    popen = h1.popen("echo '' > %s/ping.txt" % args.dir, shell=True)
+    # popen = h1.popen("echo '' > %s/ping.txt" % args.dir, shell=True)
     h2 = net.get('h2')
     interval = 0.1
     count = int(args.time/interval)
