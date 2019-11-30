@@ -122,7 +122,7 @@ def start_iperf(net):
     # long lived TCP flow. You may need to redirect iperf's stdout to avoid blocking.
     h1 = net.get('h1')
     ip = h2.IP()
-    h1.cmd(f"iperf -t {args.time} -c {ip}")
+    h1.cmd("iperf -t %s -c %s" % (args.time, ip))
 
 
 def start_webserver(net):
