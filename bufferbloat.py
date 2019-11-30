@@ -152,6 +152,11 @@ def start_ping(net):
     # redirecting stdout
     h1 = net.get('h1')
     popen = h1.popen("echo '' > %s/ping.txt" % (args.dir), shell=True)
+    h2 = net.get('h2')
+    # ping man:
+    # -c: count, stop after count
+    # -i: interval, only super user can set interval under 0.2s
+    h1.popen(f'ping -c {arg_time/0.1} -i {0.1}')
 
 
 def bufferbloat():
