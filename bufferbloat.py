@@ -212,7 +212,7 @@ def bufferbloat():
     # spawned on host h1 (not from google!)
     # Hint: have a separate function to do this and you may find the
     # loop below useful.
-    download_time[]
+    download_time = []
     start_time = time()
     while True:
         # do the measurement (say) 3 times.
