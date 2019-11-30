@@ -1,6 +1,7 @@
 '''
 Plot queue occupancy over time
 '''
+print("hello")
 from helper import *
 import plot_defaults
 import sys
