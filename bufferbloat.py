@@ -185,10 +185,12 @@ def bufferbloat():
                      outfile='%s/q.txt' % (args.dir))
 
     # TODO: Start iperf, webservers, etc.
-    p1 = Process(target=start_iperf, args=(net, ))
-    p2 = Process(target=start_webserver, args=(net, ))
-    p1.start()
-    p2.start()
+    start_iperf(net)
+    start_webserver(net)
+    # p1 = Process(target=start_iperf, args=(net, ))
+    # p2 = Process(target=start_webserver, args=(net, ))
+    # p1.start()
+    # p2.start()
 
     # Hint: The command below invokes a CLI which you can use to
     # debug.  It allows you to run arbitrary commands inside your
