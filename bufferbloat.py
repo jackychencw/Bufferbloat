@@ -242,7 +242,7 @@ def measurement(net, times = 3):
     command = 'curl -o /dev/null -s -w %s %s/http/index.html' % (args.time, h1.IP())
     print(command)
     for i in range(times):
-        t = h2.popen(command).communicate()[0]
+        t = h2.cmd(command)
     print(t)
     results = [h2.cmd(command) for i in range(times)]
     return t
