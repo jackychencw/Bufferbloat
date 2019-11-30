@@ -122,7 +122,7 @@ def start_iperf(net):
     # long lived TCP flow. You may need to redirect iperf's stdout to avoid blocking.
     h1 = net.get('h1')
     ip = h2.IP()
-    h1.cmd("iperf -t %s -c %s" % (args.time, ip))
+    h1.cmd("iperf -t %s -c %s " % (args.time, ip))
 
 
 def start_webserver(net):
@@ -173,7 +173,8 @@ def bufferbloat():
 
     # Start all the monitoring processes
     start_tcpprobe("cwnd.txt")
-    start_ping(net)
+    ping_process = Process(target=start_ping, args=(net,))
+    ping_process.start()
 
     # TODO: Start monitoring the queue sizes.  Since the switch I
     # created is "s0", I monitor one of the interfaces.  Which
@@ -185,7 +186,8 @@ def bufferbloat():
                      outfile='%s/q.txt' % (args.dir))
 
     # TODO: Start iperf, webservers, etc.
-    start_iperf(net)
+    iperf_process = Process(target=start_iperf, args=(net, ))
+    iperf_process.start()
     start_webserver(net)
     # p1 = Process(target=start_iperf, args=(net, ))
     # p2 = Process(target=start_webserver, args=(net, ))
