@@ -50,7 +50,7 @@ Average download time is 1.05291666667
 Standard Deviation is 0.528771052904
 ```
 
-# 3. QUESTIONS
+# 3. Q&A
 
 ### (1).Why do you see a difference in webpage fetch times with short and large router buffers?
 
